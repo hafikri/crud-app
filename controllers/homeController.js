@@ -144,7 +144,14 @@ const userView = (req, res, next)=>{
     });
 }
 
+const addUser = (req, res, next)=>{
+    res.render('tambah-user', {
+        layout: 'layouts/main-layouts',
+        title: 'Add Data User'
+    });
+}
+
 
 module.exports = {
-    registerView, loginView, registerCreate, loginCreate, indexView, aboutView, userView
+    registerView, loginView, registerCreate, loginCreate, indexView, aboutView, userView, addUser
 }
