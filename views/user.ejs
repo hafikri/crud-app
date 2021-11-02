@@ -29,16 +29,18 @@
                     </tr>
                 </tfoot>
                 <tbody>
+                    <% userBiodata.forEach((userBiodata, index) => { %>
                     <tr>
-                        <td>1</td>
-                        <td>Architect@binar.co.id</td>
-                        <td>Edinburgh</td>
-                        <td>Male</td>
+                        <td><%= index+1 %></td>
+                        <td><%= userBiodata.fullname %></td>
+                        <td><%= userBiodata.address %> </td>
+                        <td><%= userBiodata.jenis_kelamin %> </td>
                         <td>
                             <a target="_blank" href="https://datatables.net" class="btn btn-warning">Edit</a>
                             <a target="_blank" href="https://datatables.net" class="btn btn-danger">Hapus</a>
                         </td>
                     </tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>

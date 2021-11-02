@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/users.model');
+const UserBiodata = require('../models/user-biodata.model');
 
 const { APP_SECRET } = process.env;
 
@@ -20,6 +21,18 @@ const loginView = (req, res, next)=>{
         layout: 'layouts/reg-log-layouts',
         title: 'Login Page'
     });
+}
+
+const createUserBiodata = async (req, res)=>{
+    const{fullname, address, jenis_kelamin} = req.body
+    
+    await UserBiodata.create({
+        fullname,
+        address,
+        jenis_kelamin,
+    })
+
+    return res.status(301).redirect('/user')
 }
 
 const registerCreate = async(req, res, next)=>{
@@ -137,10 +150,13 @@ const aboutView = (req, res, next)=>{
     });
 }
 
-const userView = (req, res, next)=>{
+const userView = async (req, res, next)=>{
+    const userBiodata = await UserBiodata.findAll() 
+
     res.render('user', {
         layout: 'layouts/main-layouts',
-        title: 'User Page'
+        title: 'User Page',
+        userBiodata
     });
 }
 
@@ -153,5 +169,5 @@ const addUser = (req, res, next)=>{
 
 
 module.exports = {
-    registerView, loginView, registerCreate, loginCreate, indexView, aboutView, userView, addUser
+    registerView, loginView, createUserBiodata, registerCreate, loginCreate, indexView, aboutView, userView, addUser
 }
